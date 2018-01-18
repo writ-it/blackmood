@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>2018</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.1.9.1.min.js"></script>
+    <style>
+        .container{
+            margin-top: 5%;
+            margin-left: 15%;
+        }
+        .row{
+            margin-bottom: 2%;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        杭州天气
+    </div>
+</div>
+
+</body>
+<script>
+    function getWeatherList() {
+        $.ajax({
+            type: "get",
+            url: "/weather/getList",
+            success: function (result) {
+                var re = JSON.stringify(result);
+                var ob = JSON.parse(re);
+                for(var i=0;i<ob.length;i++){
+                    var da="<div class='row'>";
+                    var day=ob[i].day;
+                    da+=day;
+                    var zg="&nbsp;&nbsp;&nbsp;&nbsp;最高温度：";
+                    var max=ob[i].maxTemperature;
+                    if(max!=null && max!=''){
+                        da+=zg+max;
+                    }
+                    var zd="&nbsp;&nbsp;&nbsp;&nbsp;最低温度：";
+                    da+=zd;
+                    var min=ob[i].minTemperature;
+                    da+=min;
+                    var zd="&nbsp;&nbsp;&nbsp;&nbsp;预计是：";
+                    da+=zd;
+                    var info=ob[i].info;
+                    da+=info;
+                    da+="</div>";
+                    $(".container").append(da);
+                }
+            },
+            error: function () {
+                alert("55555 ~ 网络请求出错，服务端看起来有点不正常")
+            }
+        })
+    }
+    $(function(){
+        getWeatherList();
+    })
+</script>
+</html>
