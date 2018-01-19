@@ -1,7 +1,7 @@
-package com.cq.black.my.controller;
+package com.cq.black.web.my;
 
 import com.cq.black.common.crawler.CrawlerUtil;
-import com.cq.black.entity.Weather;
+import com.cq.black.entity.weather.Weather;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,8 +21,9 @@ public class WeatherController {
     @ResponseBody
     @RequestMapping("getList")
     public List<Weather> getWeatherList() {
-        List<Weather> list=crawlerUtil.jsoupHtml();
-        return list;
+//        List<Weather> list=crawlerUtil.jsoupHtml();
+//        return list;
+        return null;
     }
 
 }

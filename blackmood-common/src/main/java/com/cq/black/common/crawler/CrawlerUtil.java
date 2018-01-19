@@ -3,13 +3,10 @@ package com.cq.black.common.crawler;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-
-import com.cq.black.entity.Weather;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -143,21 +140,21 @@ public class CrawlerUtil {
      * 使用 Jsoup 爬取网页数据
      * @return
      */
-    public List<Weather> jsoupHtml() {
-        List<Weather> list = new LinkedList<>();
+    public List<?> jsoupHtml() {
+        List<?> list = new LinkedList<>();
         try {
             Document doc = Jsoup.connect("http://www.weather.com.cn/weather/101210101.shtml").get();
             Elements ul = doc.select(".t");
             Elements li = ul.select("li");
-            Weather weather = null;
-            for (Element lii : li) {
-                weather = new Weather();
-                weather.setDay(lii.selectFirst("h1").text());
-                weather.setInfo(lii.selectFirst("p").text());
-                weather.setMaxTemperature(lii.selectFirst("span").text());
-                weather.setMinTemperature(lii.selectFirst("i").text());
-                list.add(weather);
-            }
+//            Weather weather = null;
+//            for (Element lii : li) {
+//                weather = new Weather();
+//                weather.setDay(lii.selectFirst("h1").text());
+//                weather.setInfo(lii.selectFirst("p").text());
+//                weather.setMaxTemperature(lii.selectFirst("span").text());
+//                weather.setMinTemperature(lii.selectFirst("i").text());
+//                list.add(weather);
+//            }
         } catch (Exception e) {
             log.error("获取天气预报异常");
         }
@@ -165,10 +162,5 @@ public class CrawlerUtil {
             return list;
         }
         return null;
-    }
-
-    @Test
-    public void test() {
-        jsoupHtml();
     }
 }

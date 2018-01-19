@@ -1,4 +1,4 @@
-package com.cq.black.entity;
+package com.cq.black.entity.weather;
 
 public class Weather {
 
